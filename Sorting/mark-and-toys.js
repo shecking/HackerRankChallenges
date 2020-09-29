@@ -1,5 +1,4 @@
-// THIS PROBLEM IS COMPLETE* BUT NEEDS REFACTORING
-// BUT IT FAILS NUMEROUS TESTS ON HACKERRANK (likely due to execution time)
+// THIS PROBLEM IS COMPLETE
 
 /*
 Mark and Jane are very happy after having their first child. Child likes toys, Mark is buying some, and Mark wants to maximize the number of toys he can buy with a set amount of money.
