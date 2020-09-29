@@ -1,5 +1,5 @@
-// THIS PROBLEM IS SEMI-COMPLETE
-// Failed ~half of tests due to time limit
+// THIS PROBLEM IS COMPLETE*
+// INCLUDES FIRST PASS AND REFACTORED SOLUTION
 
 /*
 Starting with a 1-indexed array of zeros and a list of operations, for each operation add a value to each of the array elements between two given indices, inclusive. Once all operations have been performed, return the maximum value in the array.
@@ -33,7 +33,8 @@ After update 3, the list is 100 200 200 200 200.
 Max value is 200.
 */
 
-function arrayManipulation(n, queries) {
+// THIS WORKS BUT TAKES TOO LONG
+function arrayManipulationTooLong(n, queries) {
   // n is the size of the array
   // queries is an array of arrays, each containing a value for a, b, and k
   // Step 1: initialize/create array of 0s
@@ -54,6 +55,44 @@ function arrayManipulation(n, queries) {
       maxValue = num
     }
   }
+  // console.log(maxValue)
+}
+
+arrayManipulationTooLong(5, [[1, 2, 100], [2, 5, 100], [3, 4, 100]])
+
+//
+//////////////////// refactored solution below \\\\\\\\\\\\\\\\\\\\
+//
+
+function arrayManipulation(n, queries) {
+  // create an array of size n + 1 (accomodating for index calculations, arr[0] will remain empty)
+  const arr = new Array(n + 1)
+  // declare maxValue and currentNumber for later use/iteration
+  let maxValue = 0
+  let currentNumber = 0
+  // Loop over array and assign an object
+  // What exactly is happening in this forEach loop?
+  queries.forEach(([startRange, endRange, value]) => {
+    // If object exists, set it equal to itself (why?)
+    // If it doesn't, set object to { start: 0, end: 0 }
+    arr[startRange] = arr[startRange] || { start: 0, end: 0 }
+    arr[endRange] = arr[endRange] || { start: 0, end: 0 }
+    arr[startRange].start += value
+    arr[endRange].end += value
+    // console.log(arr)
+  })
+  // console.log('Final arr: ', arr)
+  // Find the maximum value in the array
+  arr.forEach((cell) => {
+    if (cell) {
+      currentNumber += cell.start
+      if (currentNumber > maxValue) {
+        maxValue = currentNumber
+      }
+      currentNumber -= cell.end
+    }
+  })
+  // return maxValue
   console.log(maxValue)
 }
 
