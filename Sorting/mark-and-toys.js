@@ -75,7 +75,35 @@ function maximumToys(prices, k) {
     }
   })
   console.log(maxToys)
-  return maxToys
+  // return maxToys
 }
 
-maximumToys([1, 12, 5, 111, 200, 1000, 10], 50)
+maximumToys([1, 12, 5, 111, 200, 1000, 10], 50) // expected output 4
+
+//
+//
+//
+
+function maximumToysRefactored(prices, k) {
+  // Sort the prices array (numeric sort needed, sort() alone sorts as if values are strings)
+  let sortedPrices = prices.sort((a, b) => a - b),
+      budget = k,
+      numberOfToys = 0
+  // while we still have money and the number of toys is less than the total toys
+  while (budget > 0 && numberOfToys < sortedPrices.length) {
+    // check for enough money
+    if (budget - sortedPrices[numberOfToys] > 0) {
+      // subtract toy price from budget
+      budget -= sortedPrices[numberOfToys]
+      // add 1 to numberOfToys
+      numberOfToys++
+    // not enough money
+    } else {
+      break
+    }
+  }
+  console.log(numberOfToys)
+  // return numberOfToys
+}
+
+maximumToysRefactored([1, 12, 5, 111, 200, 1000, 10], 50) // expected output 4
